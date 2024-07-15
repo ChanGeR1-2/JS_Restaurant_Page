@@ -17,7 +17,7 @@ icon.setAttribute('id', 'icon');
 document.querySelector('header').prepend(icon);
 
 nav.addEventListener('click', (e) => {
-    const target = e.currentTarget;
+    const target = e.target;
     switch (target.id) {
         case 'about':
             generatePage(aboutPage());
