@@ -2,6 +2,11 @@ import './style.css';
 import {aboutPage} from "./about";
 import iconURL from './img/icon.svg';
 
+window.addEventListener("load", () => {
+    document.body.classList.remove("preload");
+});
+
+
 const nav = document.querySelector('#menu-buttons');
 
 const icon = new Image();
@@ -12,7 +17,8 @@ icon.setAttribute('id', 'icon');
 document.querySelector('header').prepend(icon);
 
 nav.addEventListener('click', (e) => {
-    switch (e.target.id) {
+    const target = e.currentTarget;
+    switch (target.id) {
         case 'about':
             generatePage(aboutPage());
     }
