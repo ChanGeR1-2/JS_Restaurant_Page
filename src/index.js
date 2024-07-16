@@ -7,29 +7,44 @@ window.addEventListener("load", () => {
 });
 
 
-const nav = document.querySelector('#menu-buttons');
+const header = document.querySelector('header');
 
 const icon = new Image();
 icon.src = iconURL;
 icon.alt = 'icon';
 icon.setAttribute('id', 'icon');
 
-document.querySelector('header').prepend(icon);
+header.prepend(icon);
 
-nav.addEventListener('click', (e) => {
+header.addEventListener('click', (e) => {
     const target = e.target;
     switch (target.id) {
         case 'about':
             generatePage(aboutPage());
+            break;
+        case 'menu':
     }
 });
 
-function generatePage(page) {
+async function generatePage(page) {
     const content = document.querySelector('#content');
 
-    while (content.firstChild) {
-        content.removeChild(content.lastChild);
+    if (content.firstElementChild) {
+        content.lastElementChild.classList.toggle('visible');
+
+        await wait(0.25);
+
+        content.removeChild(content.lastElementChild);
     }
 
     content.appendChild(page);
+    window.setTimeout(function () {
+        page.classList.add('visible');
+    }, 100);
+}
+
+function wait(seconds) {
+    return new Promise(resolve => {
+        setTimeout(resolve, seconds * 1000);
+    });
 }

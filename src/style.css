@@ -5,12 +5,17 @@
     --header-background: #27272a;
     --bottom-shadow: 0 4px 2px -2px var(--white-text);
     --header-text-colour: #fb923c;
+    --white-filter: brightness(0) saturate(100%) invert(95%) sepia(32%) saturate(389%) hue-rotate(175deg) brightness(99%) contrast(89%);
+    --header-filter: brightness(0) saturate(100%) invert(59%) sepia(83%) saturate(538%) hue-rotate(333deg) brightness(103%) contrast(97%);
+    --content-transition-time: 0.25s;
 }
 
-* {
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 .preload * {
@@ -20,20 +25,16 @@
 
 body {
     padding: 20px;
-    display: grid;
-    grid-template-rows: 1fr 9fr;
-    grid-template-areas:
-            "header"
-    "content";
+    display: flex;
+    flex-direction: column;
     gap: 30px;
-    height: 100vh;
+    min-height: 100vh;
     background-color: var(--background);
     color: var(--white-text);
 }
 
 header {
     border-radius: 10px;
-    grid-area: header;
     padding: 10px;
     background-color: var(--header-background);
     display: flex;
@@ -44,7 +45,7 @@ header nav {
     margin-left: auto;
 }
 header .button {
-    transition-duration: 0.5s;
+    transition: background-color 0.5s, color 0.5s;
     flex: 0 1 50px;
     border: none;
     border-radius: 5px;
@@ -61,13 +62,28 @@ header .button:hover {
 }
 
 #icon {
+    transition-duration: 0.25s;
     width: 60px;
     height: auto;
-    filter: brightness(0) saturate(100%) invert(95%) sepia(32%) saturate(389%) hue-rotate(175deg) brightness(99%) contrast(89%)
+    filter: var(--white-filter);
+    cursor: pointer;
+}
+#icon:hover {
+    filter: var(--header-filter);
 }
 
 #content {
-    grid-area: content;
+    flex: 1;
+}
+#content > * {
+    transition: opacity var(--content-transition-time) ease-in, visibility 0ms ease-in var(--content-transition-time);
+    opacity: 0;
+    visibility: hidden;
+}
+.visible {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition: opacity var(--content-transition-time) ease-in, visibility 0ms ease-in 0ms !important;
 }
 
 #about-page {
