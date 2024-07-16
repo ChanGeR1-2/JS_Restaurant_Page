@@ -46,7 +46,6 @@ body {
     margin-left: auto;
 }
 .nav-bar #menu-buttons .button {
-    transition: background-color 0.5s, color 0.5s;
     flex: 0 1 50px;
     border: none;
     border-radius: 10px;
@@ -56,29 +55,66 @@ body {
     font-size: var(--button-font-size);
     cursor: pointer;
 }
-.nav-bar #menu-buttons .button:hover {
-    background-color: var(--button-hover-background);
-}
 
 #icon {
     padding: 5px;
-    transition-duration: 0.25s;
     width: 60px;
     height: auto;
     filter: var(--white-filter);
     cursor: pointer;
 }
-#icon:hover {
-    filter: var(--header-filter);
+
+@media (hover: hover) {
+    .nav-bar #menu-buttons .button {
+        transition: background-color 0.5s, color 0.5s;
+    }
+    #icon {
+        transition-duration: 0.25s;
+    }
+    .nav-bar #menu-buttons .button:hover {
+        background-color: var(--button-hover-background);
+    }
+    #icon:hover {
+        filter: var(--header-filter);
+    }
+}
+
+@media (hover: none) {
+    .nav-bar #menu-buttons .button {
+        transition: background-color 0.05s, color 0.05s;
+    }
+    #icon {
+        transition-duration: 0.05s;
+    }
+    .nav-bar #menu-buttons .button:active {
+        background-color: var(--button-hover-background);
+    }
+    #icon:active {
+        filter: var(--header-filter);
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+.toggle-button-wrapper {
+    position: absolute;
+    top: 0.375rem;
+    right: 0.5rem;
+    padding: 10px;
+    border-radius: 100%;
+    display: none;
+    transition: background-color 0.05s;
+}
+.toggle-button-wrapper:active {
+    background-color: var(--button-hover-background);
 }
 
 .hamburger-toggle-button {
+    display: flex;
     background: none;
     border: none;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: none;
     flex-direction: column;
     justify-content: space-between;
     width: 40px;
@@ -89,13 +125,13 @@ body {
 .hamburger-toggle-button .bar {
     height: 4px;
     width: 100%;
-    background-color: white;
+    background-color: var(--white-text);
     border-radius: 10px;
 }
 
 @media (max-width: 375px) {
-    .hamburger-toggle-button {
-        display: flex;
+    .toggle-button-wrapper {
+        display: block;
     }
 
     .nav-bar #menu-buttons {
@@ -140,7 +176,6 @@ body {
     flex-direction: column;
     gap: 50px;
 }
-
 
 #about-page #chef-image {
     flex: 1;
