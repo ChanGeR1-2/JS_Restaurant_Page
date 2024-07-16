@@ -65,7 +65,7 @@ body {
     transition-duration: 0.25s;
 }
 
-@media (hover: hover) {
+@media (pointer: fine) {
     .nav-bar #menu-buttons .button {
         transition: background-color 0.5s, color 0.5s;
     }
@@ -77,7 +77,7 @@ body {
     }
 }
 
-@media (hover: none) {
+@media (pointer: coarse) {
     .nav-bar #menu-buttons .button {
         transition: background-color var(--content-transition-time), color var(--content-transition-time);
     }
