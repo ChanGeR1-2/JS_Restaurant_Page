@@ -26,6 +26,13 @@ header.addEventListener('click', (e) => {
     }
 });
 
+const toggleButton = document.querySelector('.hamburger-toggle-button');
+const menuButtons = document.querySelector('#menu-buttons');
+
+toggleButton.addEventListener('click', () => {
+    menuButtons.classList.toggle('active');
+});
+
 async function generatePage(page) {
     const content = document.querySelector('#content');
 
